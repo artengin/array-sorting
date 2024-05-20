@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <title>Методы сортировки массивов</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style.v.0.1.css">
+        <link rel="icon" href="favicon.ico">
     </head>
     <body>
         <div class='sort-blocks'>
@@ -14,6 +15,7 @@
                 <option value="mixing">Сортировка перемешиванием</option>
                 <option value="dwarf">Гномья сортировка</option>
                 <option value="comb">Сортировка расческой</option>
+                <option value="selection">Сортировка выбором</option>
               </select>
             <p>Заполните массив цифрами:</p>
             <div class='input-block'>
@@ -129,9 +131,32 @@ const arraySorting = () => {
 }
 console.log(arraySorting());
 </pre>
+<pre id="code-selection">
+//Сортировка выбором
+const arraySorting = () => {
+  let array = [37, 2, 89, 65, 1, 28, 41];
+  const l = array.length;
+  for (let i = 0; i < l; i++) {
+    let min = i;
+    for (let j = i; j < l; j++) {
+       if (array[j] < array[min]) {
+         min = j;
+       }
+    }
+    if (min != i) {
+        let temp = array[i];
+        array[i] = array[min];
+        array[min] = temp;
+    }
+  }
+  return array;
+}
+console.log(arraySorting());
+</pre>
             </div>
-            <canvas id='sort-bubble'></canvas>   
+            <canvas id='sort-canvas'></canvas> 
+            <p id="original-array"></p>  
         </div>
-        <script src="js/script.js"></script>
+        <script src="js/script.v.0.1.js"></script>
     </body>
 </html>

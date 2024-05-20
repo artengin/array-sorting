@@ -1,4 +1,8 @@
-body{font-family: arial;margin: 30px 0;padding: 0;}
+body{
+    font-family: arial;
+    margin: 30px 0;
+    padding: 0;
+}
 .sort-blocks{
     display: flex;
     justify-content: center;
@@ -8,7 +12,11 @@ body{font-family: arial;margin: 30px 0;padding: 0;}
     width: 90%;
     margin: 0 auto;
 }
-.sort-blocks p{margin: 5px 0;font-size: 14px;font-style: italic;}
+.sort-blocks p{
+    margin: 5px 0;
+    font-size: 14px;
+    font-style: italic;
+}
 #method{
     padding: 10px;
     text-align: дуае;
@@ -26,20 +34,20 @@ body{font-family: arial;margin: 30px 0;padding: 0;}
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 input[type="number"] {
     -moz-appearance: textfield;
-  }
-  input[type="number"]:hover,
-  input[type="number"]:focus {
+}
+input[type="number"]:hover,
+input[type="number"]:focus {
     -moz-appearance: number-input;
-  }
+}
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+    -webkit-appearance: none; 
+    margin: 0; 
 }
 .input-sort{
     width: 27px;
@@ -139,58 +147,82 @@ button{
 button:hover {
     box-shadow: 0 0 0 2px white, 0 0 0 4px #3C82F8;
 }
+#original-array{
+    text-align: left;
+    width: 500px;
+    font-size: 13px;
+    font-style: normal; 
+    margin: 10px 0;
+}
 @media (max-width: 600px) {
     .sort-blocks {
         width: 90%;
         text-align: center;
         margin: 0 auto;
     }
-.input-block {
-    font-size: 15px;
-    margin: 10px 5px;
-    flex-wrap: wrap;
-    margin: 0 auto;
-}
+    .input-block {
+        font-size: 15px;
+        margin: 10px 5px;
+        flex-wrap: wrap;
+        margin: 0 auto;
+    }
     .input-sort {
-    width: 25px;
-    height: 21px;
-    padding: 3px;
-    text-align: center;
-    font-size: 12px;
-    margin: 7px 4px;
-}
- canvas {
-     max-width: 400px;}
+        width: 25px;
+        height: 21px;
+        padding: 3px;
+        text-align: center;
+        font-size: 12px;
+        margin: 7px 4px;
+    }
+    canvas{
+        max-width: 400px;
+    }
+    #original-array{
+        max-width: 400px;
+        font-size: 13px;
+    }
 }
 @media (max-width: 550px) {
-     .code-block {
+    .code-block {
         width: 370px;
         padding: 10px 10px;
         margin: 20px 0 5px;
         font-size: 14px;
-}.active-code pre {
-    font-size: 11px;
-}
+    }
+    .active-code pre {
+        font-size: 11px;
+    }
 }
 @media (max-width: 450px) {
- canvas {
-     max-width: 300px;}
-     .code-block {
+    canvas {
+        max-width: 300px;
+    }
+    #original-array{
+        max-width: 300px;
+        font-size: 10.5px;
+    }
+    .code-block {
         width: 300px;
         padding: 10px 10px;
         margin: 20px 0 5px;
         font-size: 14px;
-}.active-code pre {
-    font-size: 9.5px;
+    }
+    .active-code pre {
+        font-size: 9.5px;
+    }
 }
-}@media (max-width: 400px) {
- 
-     .code-block {
+@media (max-width: 400px) { 
+    .code-block {
         width: 270px;
         padding: 10px 10px;
         margin: 20px 0 5px;
         font-size: 14px;
-}.active-code pre {
-    font-size: 8px;
-}
+    }
+    .active-code pre {
+        font-size: 8px;
+    }
+    #original-array{
+        font-size: 10px;
+        letter-spacing: 0;
+    }
 }
