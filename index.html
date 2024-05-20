@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Методы сортировки массивов</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class='sort-blocks'>
+            <h1>Методы сортировки массивов:</h1>
+            <select id="method">
+                <option value="bubble">Пузырьковая сортировка</option>
+                <option value="mixing">Сортировка перемешиванием</option>
+                <option value="dwarf">Гномья сортировка</option>
+                <option value="comb">Сортировка расческой</option>
+              </select>
+            <p>Заполните массив цифрами:</p>
+            <div class='input-block'>
+                <span>[</span>
+                <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
+                <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
+                <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
+                <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
+                <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
+                <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
+                <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
+                <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
+                <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
+                <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'>
+                <span>]</span>
+            </div>
+            <p class="speed-block">Скорость итерации: <span id="speed-btn"><span class="speed-btn">0.1</span><span class="speed-btn">0.2</span><span class="speed-btn active">0.4</span><span class="speed-btn">0.6</span><span class="speed-btn">0.8</span><span class="speed-btn">1</span></span></p>
+            <button id='btn-sort'>сортировать</button>
+            <div class="code-block" id="code-open">
+                <span class="code-title">Code JS:</span>
+<pre id="code-bubble">
+//Сортировка пузырьковым методом
+const arraySorting = () => {
+    let array = [37, 2, 89, 65, 1, 28, 41];
+    do{
+        swap = false;
+        for (let i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                temp = array[i + 1];
+                array[i + 1] = array[i];
+                array[i] = temp;
+                swap = true;
+            }
+        }
+    } while (swap);
+    return array;
+}
+console.log(arraySorting());
+</pre>
+<pre id="code-mixing">
+//Сортировка перемешиванием
+const arraySorting = () => {
+    let array = [37, 2, 89, 65, 1, 28, 41];
+    let start = 0;
+    let stop = array.length - 1;
+    do{
+        swap = false;
+        for (i = start; i < stop; i++) {
+            if (array[i] > array[i + 1]) {
+                temp = array[i + 1];
+                array[i + 1] = array[i];
+                array[i] = temp;
+                swap = true;
+            } 
+        }
+        for (l = stop - 1; l >= start; l--) {
+            if (array[l] > array[l + 1]) {
+                temp = array[l + 1];
+                array[l + 1] = array[l];
+                array[l] = temp;
+                swap = true;
+            }
+        }
+        start++;
+        stop--;
+    } while (swap);
+    return array;
+}
+console.log(arraySorting());
+</pre>
+<pre id="code-dwarf">
+//Гномья сортировка
+const arraySorting = () => {
+    let array = [37, 2, 89, 65, 1, 28, 41];
+    let index = 1;
+    let nextIndex = index + 1;
+    while (index < array.length) {
+        if (array[index - 1] < array[index]) {
+            index = nextIndex;
+            nextIndex++; 
+        } else {
+            temp = array[index - 1];
+            array[index - 1] = array[index];
+            array[index] = temp;
+            index--;
+            if (index === 0) {
+                index = nextIndex;
+                nextIndex++;
+            }
+        }
+    }
+    return array;
+}
+console.log(arraySorting());
+</pre>
+<pre id="code-comb">
+//Сортировка расчёской
+const arraySorting = () => {
+  let array = [37, 2, 89, 65, 1, 28, 41];
+  const l = array.length;
+  const constant = 1.247;
+  let step = l / constant;
+  while (step > 1) {
+    const stepRound = Math.floor(step);
+    for (let i = 0, j = stepRound; j < l; i++, j++) {
+      if (array[i] > array[j]) {
+       [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+  step = stepRound / constant;
+  }
+  return array;
+}
+console.log(arraySorting());
+</pre>
+            </div>
+            <canvas id='sort-bubble'></canvas>   
+        </div>
+        <script src="js/script.js"></script>
+    </body>
+</html>

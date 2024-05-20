@@ -1,0 +1,196 @@
+body{font-family: arial;margin: 30px 0;padding: 0;}
+.sort-blocks{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+}
+.sort-blocks p{margin: 5px 0;font-size: 14px;font-style: italic;}
+#method{
+    padding: 10px;
+    text-align: дуае;
+    width: 310px;
+    border-radius: 7px;
+    background: #fff;
+    margin-bottom: 20px;
+}
+.input-block{
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    margin: 10px;
+    justify-content: center;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  input[type="number"]:hover,
+  input[type="number"]:focus {
+    -moz-appearance: number-input;
+  }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.input-sort{
+    width: 27px;
+    height: 23px;
+    padding: 3px;
+    text-align: center;
+    font-size: 12px;
+    margin: 0 4px;
+}
+canvas{
+    max-width: 510px;
+}
+.speed-block{
+    margin: 17px 0 6px;
+    font-style: italic;
+    font-size: 14px;
+}
+.speed-btn:after{
+    content: "c";
+    font-style: italic;
+}
+.speed-btn{
+    cursor: pointer;
+    margin: 0px 4px;
+    font-size: 12px;
+    font-style: normal;
+    border: 1px solid #000;
+    border-radius: 6px;
+    padding: 3px 4px;
+    transition: all 0.2s;
+}
+#speed-btn{
+    margin-top: 10px;
+    display: inline-block;
+}
+.active{
+    background: #0b63f6;
+    border: none;
+    color: #fff;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #3C82F8;
+    transition: all 0.2s;
+}
+.code-block{
+    text-align: left;
+    width: 470px;
+    background: #e3e3e380;
+    border: 1px solid #76767680;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 20px 0 7px;
+    color: #2d2d2d;
+    box-shadow: 4px 0px 0 8px white, -5px 0 0 2px #3C82F8;
+}
+.code-block span{
+    font-weight: 900;
+    color: #000;
+    position: relative;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.code-block span:before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 0px;
+    top: 3px;
+    left: -13px;
+    border-left: 8px solid #000;
+    border-right: 8px solid #e3e3e300;
+    border-top: 6px solid #e3e3e300;
+    border-bottom: 6px solid #e3e3e300;
+    transition: all 0.1s;
+}
+.active-code span:before {
+    transform-origin: 25% 50%;
+    transform: rotate(90deg);
+    transition: all 0.1s;
+}
+pre{
+    display: none;
+}
+.active-code{
+    display: block;
+}
+button{
+    border-radius: 10px;
+    color: white;
+    transition: .2s linear;
+    background: #0B63F6;
+    border: none;
+    padding: 10px 30px;
+    font-size: 15px;
+    text-transform: uppercase;
+    margin: 20px 0 5px;
+}
+
+button:hover {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #3C82F8;
+}
+@media (max-width: 600px) {
+    .sort-blocks {
+        width: 90%;
+        text-align: center;
+        margin: 0 auto;
+    }
+.input-block {
+    font-size: 15px;
+    margin: 10px 5px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+    .input-sort {
+    width: 25px;
+    height: 21px;
+    padding: 3px;
+    text-align: center;
+    font-size: 12px;
+    margin: 7px 4px;
+}
+ canvas {
+     max-width: 400px;}
+}
+@media (max-width: 550px) {
+     .code-block {
+        width: 370px;
+        padding: 10px 10px;
+        margin: 20px 0 5px;
+        font-size: 14px;
+}.active-code pre {
+    font-size: 11px;
+}
+}
+@media (max-width: 450px) {
+ canvas {
+     max-width: 300px;}
+     .code-block {
+        width: 300px;
+        padding: 10px 10px;
+        margin: 20px 0 5px;
+        font-size: 14px;
+}.active-code pre {
+    font-size: 9.5px;
+}
+}@media (max-width: 400px) {
+ 
+     .code-block {
+        width: 270px;
+        padding: 10px 10px;
+        margin: 20px 0 5px;
+        font-size: 14px;
+}.active-code pre {
+    font-size: 8px;
+}
+}
