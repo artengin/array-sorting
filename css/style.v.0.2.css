@@ -1,6 +1,6 @@
 body{
     font-family: arial;
-    margin: 30px 0;
+    margin: 20px 0 30px;
     padding: 0;
 }
 .sort-blocks{
@@ -153,6 +153,14 @@ button:hover {
     font-size: 13px;
     font-style: normal; 
     margin: 10px 0;
+}
+.git-link{
+    margin: 0 auto;
+    display: block;
+    width: 35px;
+}
+.git-link img{
+    width: 100%;
 }
 @media (max-width: 600px) {
     .sort-blocks {
