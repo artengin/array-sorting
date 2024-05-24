@@ -9,12 +9,34 @@ const codeMixing = document.querySelector("#code-mixing");
 const codeDwarf = document.querySelector("#code-dwarf");
 const codeComb = document.querySelector("#code-comb");
 const codeSelection = document.querySelector("#code-selection");
-
+const btnClear = document.querySelector(".btn-clear");
+const btnRandom = document.querySelector(".btn-random");
+const arrInput = document.querySelectorAll('.input-sort');
+const titleCompleteArray= document.querySelector('.title-complete-array');    
 let codeArray = [codeBubble, codeMixing, codeDwarf, codeComb, codeSelection];
 let methodName = ['bubble', 'mixing', 'dwarf', 'comb', 'selection'];
 
 sortMethod.addEventListener('click', openCode);
 codeOpen.addEventListener('click', openCode);
+btnClear.addEventListener('click', clearArray);
+btnRandom.addEventListener('click', randomArray);
+
+function clearArray(){
+    for (let i = 0, l = arrInput.length; i < l; i++) {
+        arrInput[i].value = '';
+    }
+}
+function randomArray(){
+    for (let i = 0, l = arrInput.length; i < l; i++) {
+        randomNumber = Math.round(Math.random() * 9999);
+        if (Math.random() < 0.3) {
+            arrInput[i].value = '-' + randomNumber;
+        } else{
+        arrInput[i].value = randomNumber;
+
+        };
+    }
+}
 
 function openCode(e) {
     if (e.target.classList.contains('code-title')) {
@@ -71,7 +93,7 @@ function drawBubbleCanvas(arr, number = false, swap = false, color = '#000') {
         } else {
             ctx.strokeStyle = color;
         }
-        ctx.strokeRect(x, 40, 50, 50);
+        ctx.strokeRect(x, 40, 47, 50);
         //текст
         ctx.fillStyle = color;
         ctx.font = "17px serif";
@@ -120,7 +142,7 @@ function drawmMixingCanvas(arr, number, swap = false) {
         } else {
             ctx.strokeStyle = color;
         }
-        ctx.strokeRect(x, 40, 50, 50);
+        ctx.strokeRect(x, 40, 47, 50);
         //текст
         ctx.fillStyle = color;
         ctx.font = "17px serif";
@@ -169,7 +191,7 @@ function drawCombCanvas(arr, number, number1, swap = false) {
         } else {
             ctx.strokeStyle = color;
         }
-        ctx.strokeRect(x, 40, 50, 50);
+        ctx.strokeRect(x, 40, 47, 50);
         //текст
         ctx.fillStyle = color;
         ctx.font = "17px serif";
@@ -239,14 +261,14 @@ function drawSelectionCanvas(arr, step, done, min, max, swap = false) {
         }
         if (min === i || max === i) {
             ctx.fillStyle = "green";
-            ctx.fillRect(x, 40, 50, 50);
+            ctx.fillRect(x, 40, 47, 50);
             ctx.fillStyle = "#fff";
-            ctx.font = "19px serif";
+            ctx.font = "17px serif";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText(arr[i], x + 25, 65);
         } else {
-            ctx.strokeRect(x, 40, 50, 50);
+            ctx.strokeRect(x, 40, 47, 50);
             //текст
             ctx.fillStyle = color;
             ctx.font = "17px serif";
@@ -258,9 +280,9 @@ function drawSelectionCanvas(arr, step, done, min, max, swap = false) {
         if (step === i) {
             ctx.fillStyle = "red";
             ctx.beginPath();
-            ctx.moveTo(x + 25, 92);
-            ctx.lineTo(x + 30, 100);
-            ctx.lineTo(x + 20, 100);
+            ctx.moveTo(x + 24, 92);
+            ctx.lineTo(x + 29, 100);
+            ctx.lineTo(x + 19, 100);
             ctx.fill();
         } 
         if (max === i) {
@@ -299,11 +321,23 @@ let isActive = false;
 
 btnSort.addEventListener('click', startSort);
 function startSort(){
-    const arrInput = document.querySelectorAll('.input-sort');
     let arr = [];
     let arrOrigin = [];
     let speed = 0;
-    
+    if (titleCompleteArray.classList.contains('empty-array')) {
+        titleCompleteArray.classList.remove('empty-array');
+    }
+    for (let i = 0, l = arrInput.length; i < l; i++) {
+        if (arrInput[i].value){
+            arr.push(Number(arrInput[i].value));
+            arrOrigin.push(' '+ arrInput[i].value);
+        }
+    }
+    if (arr.length === 0) {
+        titleCompleteArray.classList.add('empty-array');
+        return;
+    }
+
     function sleep(ms) {
         return new Promise(
             resolve => setTimeout(resolve, ms)
@@ -320,19 +354,11 @@ function startSort(){
             }
         }
         
-        for (let i = 0, l = arrInput.length; i < l; i++) {
-            if (arrInput[i].value){
-                arr.push(Number(arrInput[i].value));
-                arrOrigin.push(' '+ arrInput[i].value);
-            }
-        }
+        
         originalArray.textContent = "[" + arrOrigin + "]";
-        function clearField(){
+        function stopSorting(){
             isActive = false;
             btnSort.textContent = 'Сортировать'
-            for (let i = 0, l = arrInput.length; i < l; i++) {
-                arrInput[i].value = '';
-            }
         }
         async function startBubble(){
             let newArr = arr; 
@@ -355,7 +381,7 @@ function startSort(){
             } while (swap);
             drawBubbleCanvas(newArr, false, false, 'green');
 
-            clearField();
+            stopSorting();
         }
 
         async function startMixing(){
@@ -396,7 +422,7 @@ function startSort(){
                 stop--;
             } while (swap);
             drawBubbleCanvas(newArr, false, false, 'green');
-            clearField();
+            stopSorting();
         }
         async function startDwarf(){
             let newArr = arr; 
@@ -422,7 +448,7 @@ function startSort(){
                 await sleep(speed * 1000);
             }
             drawBubbleCanvas(newArr, false, false, 'green');
-            clearField();
+            stopSorting();
         }
         async function startComb(){
             let newArr = arr; 
@@ -444,7 +470,7 @@ function startSort(){
 
             }
             drawBubbleCanvas(newArr, false, false, 'green');
-            clearField();
+            stopSorting();
         }
         async function startSelection(){
             let newArr = arr; 
@@ -469,7 +495,7 @@ function startSort(){
                 }
             }
             drawBubbleCanvas(newArr, false, false, 'green');
-            clearField();
+            stopSorting();
         }
 
         if (sortMethod.value === 'bubble') {

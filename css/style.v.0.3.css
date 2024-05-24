@@ -32,6 +32,33 @@ body{
     margin: 10px;
     justify-content: center;
 }
+.btn-input-block{
+    width: 30px;
+    margin: 8px 5px 0px;
+}
+.btn-input-block img{
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn-random:hover {
+    transform: rotate(-20deg)  scale(1.1);
+}
+.btn-clear{
+    border-radius: 8px;
+    padding: 0px;
+}
+.btn-clear:hover {
+    box-shadow: 0 0 0 0px white, 0 0 0 2px #3C82F8;
+}
+.title-complete-array{
+    margin-bottom: 2px !important;
+}
+.empty-array{
+    border-bottom: 2px dashed #ff0909;
+    margin-bottom: 0px !important;
+    color: #ff0909;
+}
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -50,12 +77,12 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 }
 .input-sort{
-    width: 27px;
+    width: 29px;
     height: 23px;
-    padding: 3px;
+    padding: 3px 1px;
     text-align: center;
-    font-size: 12px;
-    margin: 0 4px;
+    font-size: 11px;
+    margin: 0 2px;
 }
 canvas{
     max-width: 510px;
@@ -84,7 +111,7 @@ canvas{
     display: inline-block;
 }
 .active{
-    background: #0b63f6;
+    background: linear-gradient(45deg, #61B6F6, #017EDB);
     border: none;
     color: #fff;
     box-shadow: 0 0 0 2px white, 0 0 0 4px #3C82F8;
@@ -136,7 +163,7 @@ button{
     border-radius: 10px;
     color: white;
     transition: .2s linear;
-    background: #0B63F6;
+    background: linear-gradient(45deg, #61B6F6, #017EDB);
     border: none;
     padding: 10px 30px;
     font-size: 15px;
@@ -175,12 +202,12 @@ button:hover {
         margin: 0 auto;
     }
     .input-sort {
-        width: 25px;
+        width: 26px;
         height: 21px;
-        padding: 3px;
+        padding: 3px 0px;
         text-align: center;
         font-size: 12px;
-        margin: 7px 4px;
+        margin: 7px 2px;
     }
     canvas{
         max-width: 400px;

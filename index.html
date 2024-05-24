@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <title>Методы сортировки массивов</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/style.v.0.2.css">
-        <link rel="icon" href="favicon.ico">
+        <link rel="stylesheet" href="css/style.v.0.3.css">
+        <link rel="icon" href="img/favicon.ico">
     </head>
     <body>
         <div class='sort-blocks'>
@@ -17,9 +17,11 @@
                 <option value="comb">Сортировка расческой</option>
                 <option value="selection">Сортировка выбором</option>
               </select>
-            <p>Заполните массив цифрами:</p>
+            <p class="title-complete-array">Заполните массив цифрами:</p>
             <div class='input-block'>
-                <span>[</span>
+                <span class="btn-input-block">
+                    <img src="img/random.png" alt="Radom Array" title="Create random array" class="btn-random">
+                </span><span>[</span>
                 <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
                 <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
                 <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
@@ -31,6 +33,9 @@
                 <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'><span>,</span>
                 <input type='number' onkeydown="javascript: return event.keyCode == 69 ? false : true" oninput="checkLength(this)" class='input-sort'>
                 <span>]</span>
+                <span class="btn-input-block">
+                    <img src="img/clear.png" alt="Clear Array" title="Clear array value" class="btn-clear">
+                </span>
             </div>
             <p class="speed-block">Скорость итерации: <span id="speed-btn"><span class="speed-btn">0.1</span><span class="speed-btn">0.2</span><span class="speed-btn active">0.4</span><span class="speed-btn">0.6</span><span class="speed-btn">0.8</span><span class="speed-btn">1</span></span></p>
             <button id='btn-sort'>сортировать</button>
@@ -157,7 +162,7 @@ console.log(arraySorting());
             <canvas id='sort-canvas'></canvas> 
             <p id="original-array"></p>  
         </div>
-        <a href="https://github.com/artengin/artengin.github.io" target="_blank" class="git-link"><img src="git.png" alt="GitHub.io"></a>
-        <script src="js/script.v.0.1.js"></script>
+        <a href="https://github.com/artengin/artengin.github.io" target="_blank" class="git-link"><img src="img/git.png" alt="GitHub.io"></a>
+        <script src="js/script.v.0.2.js"></script>
     </body>
 </html>
