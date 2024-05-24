@@ -376,29 +376,22 @@ function startSort() {
 
         async function startBubble() {
             let newArr = arr;
-            do {
-                swap = false;
-                for (let i = 0, l = newArr.length - 1; i < l; i++) {
+            for (let out = newArr.length - 1; out > 0; out--) {
+                for (let i = 0; i < out; i++) {
                     if (sortingState) {
                         await drawBubbleCanvas(newArr, i);
-                        await sleep(speed * 1000);
                         if (newArr[i] > newArr[i + 1]) {
                             temp = newArr[i + 1];
                             newArr[i + 1] = newArr[i];
                             newArr[i] = temp;
-                            swap = true;
                             await drawBubbleCanvas(newArr, i, 1);
                         } else {
                             await drawBubbleCanvas(newArr, i);
                         }
                         await sleep(speed * 1000);
-                    } else {
-                        drawBubbleCanvas(newArr, false, false, 'green');
-                        stopSorting();
-                        return;
                     }
                 }
-            } while (swap);
+            }
             drawBubbleCanvas(newArr, false, false, 'green');
 
             stopSorting();
