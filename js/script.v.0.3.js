@@ -67,10 +67,11 @@ function checkLength(keys) {
 speedBlock.addEventListener('click', changeSpeed);
 function changeSpeed(e) {
     for (let i = 0, l = speedBtn.length; i < l; i++) {
-        if(speedBtn[i].classList.contains('active')){
-            speedBtn[i].classList.toggle('active');
-        }
+        
         if (speedBtn[i] === e.target){
+            if(speedBtn[i].classList.contains('active')){
+                speedBtn[i].classList.toggle('active');
+            }
             speedBtn[i].classList.add('active');
         }
     }
