@@ -20,7 +20,7 @@ sortMethod.addEventListener('click', openCode);
 codeOpen.addEventListener('click', openCode);
 btnClear.addEventListener('click', clearArray);
 btnRandom.addEventListener('click', randomArray);
-
+let startStop =true;
 function clearArray(){
     for (let i = 0, l = arrInput.length; i < l; i++) {
         arrInput[i].value = '';
@@ -320,9 +320,13 @@ function drawSelectionCanvas(arr, step, done, min, max, swap = false) {
     }
 }
 let isActive = false;
-
+let sortingState = true;
 btnSort.addEventListener('click', startSort);
 function startSort(){
+    if (btnSort.textContent == 'Остановить') {
+        sortingState = false;
+        return;
+    }
     let arr = [];
     let arrOrigin = [];
     let speed = 0;
@@ -347,7 +351,7 @@ function startSort(){
     }
     
     if (!isActive) {
-        btnSort.textContent = 'Ждите ...'
+        btnSort.textContent = 'Остановить';
         isActive = true;
         
         for (let i = 0, l = speedBtn.length; i < l; i++) {
@@ -356,10 +360,10 @@ function startSort(){
             }
         }
         
-        
         originalArray.textContent = "[" + arrOrigin + "]";
         function stopSorting(){
             isActive = false;
+            sortingState = true;
             btnSort.textContent = 'Сортировать'
         }
         async function startBubble(){
@@ -367,18 +371,24 @@ function startSort(){
             do{
                 swap = false;
                 for (let i = 0, l = newArr.length - 1; i < l; i++) {
-                    await drawBubbleCanvas(newArr, i);
-                    await sleep(speed * 1000);
-                    if (newArr[i] > newArr[i + 1]) {
-                        temp = newArr[i + 1];
-                        newArr[i + 1] = newArr[i];
-                        newArr[i] = temp;
-                        swap = true;
-                        await drawBubbleCanvas(newArr, i, 1);
-                    } else {
+                    if (sortingState) {
                         await drawBubbleCanvas(newArr, i);
+                        await sleep(speed * 1000);
+                        if (newArr[i] > newArr[i + 1]) {
+                            temp = newArr[i + 1];
+                            newArr[i + 1] = newArr[i];
+                            newArr[i] = temp;
+                            swap = true;
+                            await drawBubbleCanvas(newArr, i, 1);
+                        } else {
+                            await drawBubbleCanvas(newArr, i);
+                        }
+                        await sleep(speed * 1000);
+                    } else {
+                        drawBubbleCanvas(newArr, false, false, 'green');
+                        stopSorting();
+                        return;
                     }
-                    await sleep(speed * 1000);
                 }
             } while (swap);
             drawBubbleCanvas(newArr, false, false, 'green');
@@ -393,32 +403,44 @@ function startSort(){
             do{
                 swap = false;
                 for (i = start; i < stop; i++) {
-                    await drawBubbleCanvas(newArr, i);
-                    await sleep(speed * 1000);
-                    if (newArr[i] > newArr[i + 1]) {
-                        temp = newArr[i + 1];
-                        newArr[i + 1] = newArr[i];
-                        newArr[i] = temp;
-                        swap = true;
-                        await drawBubbleCanvas(newArr, i, 1);
-                    } else {
+                    if (sortingState) {
                         await drawBubbleCanvas(newArr, i);
+                        await sleep(speed * 1000);
+                        if (newArr[i] > newArr[i + 1]) {
+                            temp = newArr[i + 1];
+                            newArr[i + 1] = newArr[i];
+                            newArr[i] = temp;
+                            swap = true;
+                            await drawBubbleCanvas(newArr, i, 1);
+                        } else {
+                            await drawBubbleCanvas(newArr, i);
+                        }
+                        await sleep(speed * 1000);
+                    } else {
+                        drawBubbleCanvas(newArr, false, false, 'green');
+                        stopSorting();
+                        return;
                     }
-                    await sleep(speed * 1000);
                 }
                 for (l = stop - 1;l >= start; l--) {
-                    await drawmMixingCanvas(newArr, l + 1);
-                    await sleep(speed * 1000);
-                    if (newArr[l] > newArr[l + 1]) {
-                        temp = newArr[l + 1];
-                        newArr[l + 1] = newArr[l];
-                        newArr[l] = temp;
-                        swap = true;
-                        await drawmMixingCanvas(newArr, l + 1, 1);
-                    } else {
+                    if (sortingState) {
                         await drawmMixingCanvas(newArr, l + 1);
+                        await sleep(speed * 1000);
+                        if (newArr[l] > newArr[l + 1]) {
+                            temp = newArr[l + 1];
+                            newArr[l + 1] = newArr[l];
+                            newArr[l] = temp;
+                            swap = true;
+                            await drawmMixingCanvas(newArr, l + 1, 1);
+                        } else {
+                            await drawmMixingCanvas(newArr, l + 1);
+                        }
+                        await sleep(speed * 1000);
+                    } else {
+                        drawBubbleCanvas(newArr, false, false, 'green');
+                        stopSorting();
+                        return;
                     }
-                    await sleep(speed * 1000);
                 }
                 start++;
                 stop--;
@@ -431,23 +453,29 @@ function startSort(){
             let index = 1;
             let nextIndex = index + 1;
             while (index < newArr.length) {
-                await drawmMixingCanvas(newArr, index);
-                await sleep(speed * 1000);
-                if (newArr[index - 1] < newArr[index]) {
-                    index = nextIndex;
-                    nextIndex++; 
-                } else {
-                    temp = newArr[index - 1];
-                    newArr[index - 1] = newArr[index];
-                    newArr[index] = temp;
-                    index--;
-                    await drawmMixingCanvas(newArr, index + 1, 1);
-                    if (index === 0) {
+                if (sortingState) {
+                    await drawmMixingCanvas(newArr, index);
+                    await sleep(speed * 1000);
+                    if (newArr[index - 1] < newArr[index]) {
                         index = nextIndex;
-                        nextIndex++;
+                        nextIndex++; 
+                    } else {
+                        temp = newArr[index - 1];
+                        newArr[index - 1] = newArr[index];
+                        newArr[index] = temp;
+                        index--;
+                        await drawmMixingCanvas(newArr, index + 1, 1);
+                        if (index === 0) {
+                            index = nextIndex;
+                            nextIndex++;
+                        }
                     }
+                    await sleep(speed * 1000);
+                } else {
+                    drawBubbleCanvas(newArr, false, false, 'green');
+                    stopSorting();
+                    return;
                 }
-                await sleep(speed * 1000);
             }
             drawBubbleCanvas(newArr, false, false, 'green');
             stopSorting();
@@ -460,13 +488,19 @@ function startSort(){
             while (step >= 1) {
                 const stepRound = Math.floor(step);
                 for (let i = 0, j = stepRound; j < l; i++, j++) {
-                    await drawCombCanvas(newArr, i, j);
-                    await sleep(speed * 1000);
-                    if (newArr[i] > newArr[j]) {
-                        [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
-                        await drawCombCanvas(newArr, i, j, 1);
+                    if (sortingState) {
+                        await drawCombCanvas(newArr, i, j);
+                        await sleep(speed * 1000);
+                        if (newArr[i] > newArr[j]) {
+                            [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+                            await drawCombCanvas(newArr, i, j, 1);
+                        }
+                        await sleep(speed * 1000);
+                    } else {
+                        drawBubbleCanvas(newArr, false, false, 'green');
+                        stopSorting();
+                        return;
                     }
-                    await sleep(speed * 1000);
                 }
                 step = stepRound / constant;
 
@@ -480,12 +514,18 @@ function startSort(){
             for (let i = 0; i < l; i++) {
                 let min = i;
                 for (let j = i; j < l; j++) {
-                    await drawSelectionCanvas(newArr, j, i, i, min);
-                    await sleep(speed * 1000);
-                    if (newArr[j] < newArr[min]) {
-                        min = j;
+                    if (sortingState) {
                         await drawSelectionCanvas(newArr, j, i, i, min);
                         await sleep(speed * 1000);
+                        if (newArr[j] < newArr[min]) {
+                            min = j;
+                            await drawSelectionCanvas(newArr, j, i, i, min);
+                            await sleep(speed * 1000);
+                        }
+                    } else {
+                        drawBubbleCanvas(newArr, false, false, 'green');
+                        stopSorting();
+                        return;
                     }
                 }
                 if (min != i) {
