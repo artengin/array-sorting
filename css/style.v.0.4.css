@@ -106,6 +106,9 @@ canvas{
     padding: 3px 4px;
     transition: all 0.2s;
 }
+.speed-btn:hover{
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #3C82F8;
+}
 #speed-btn{
     margin-top: 10px;
     display: inline-block;
