@@ -1,4 +1,4 @@
-const speedBlock = document.querySelector("#speed-btn"); 
+const speedBlock = document.querySelector("#speed-btn");
 const sortMethod = document.querySelector("#method");
 const speedBtn = document.querySelectorAll('.speed-btn');
 const btnSort = document.querySelector("#btn-sort");
@@ -12,7 +12,7 @@ const codeSelection = document.querySelector("#code-selection");
 const btnClear = document.querySelector(".btn-clear");
 const btnRandom = document.querySelector(".btn-random");
 const arrInput = document.querySelectorAll('.input-sort');
-const titleCompleteArray= document.querySelector('.title-complete-array');    
+const titleCompleteArray = document.querySelector('.title-complete-array');
 let codeArray = [codeBubble, codeMixing, codeDwarf, codeComb, codeSelection];
 let methodName = ['bubble', 'mixing', 'dwarf', 'comb', 'selection'];
 
@@ -20,21 +20,22 @@ sortMethod.addEventListener('click', openCode);
 codeOpen.addEventListener('click', openCode);
 btnClear.addEventListener('click', clearArray);
 btnRandom.addEventListener('click', randomArray);
-let startStop =true;
-function clearArray(){
+let startStop = true;
+
+function clearArray() {
     for (let i = 0, l = arrInput.length; i < l; i++) {
         arrInput[i].value = '';
     }
 }
-function randomArray(){
+
+function randomArray() {
     for (let i = 0, l = arrInput.length; i < l; i++) {
-        randomNumber = Math.round(Math.random() * 9999);
+        let randomNumber = Math.round(Math.random() * 9999);
         if (Math.random() < 0.3) {
             arrInput[i].value = '-' + randomNumber;
-        } else{
-        arrInput[i].value = randomNumber;
-
-        };
+        } else {
+            arrInput[i].value = randomNumber;
+        }
     }
 }
 
@@ -53,23 +54,23 @@ function openCode(e) {
                 codeArray[i].classList.add('active-code');
             }
         }
-    } 
-    
+    }
 }
 
 function checkLength(keys) {
     let maxLength = 4;
-    if(keys.value.length > maxLength) {
+    if (keys.value.length > maxLength) {
         keys.value = keys.value.substring(0, 4);
     }
 }
 
 speedBlock.addEventListener('click', changeSpeed);
+
 function changeSpeed(e) {
     for (let i = 0, l = speedBtn.length; i < l; i++) {
-        if (speedBtn[i] === e.target){
+        if (speedBtn[i] === e.target) {
             for (let i = 0, l = speedBtn.length; i < l; i++) {
-                if(speedBtn[i].classList.contains('active')){
+                if (speedBtn[i].classList.contains('active')) {
                     speedBtn[i].classList.remove('active');
                 }
             }
@@ -81,8 +82,9 @@ function changeSpeed(e) {
 const canvas = document.getElementById("sort-canvas");
 let pi = Math.PI;
 let ctx = canvas.getContext('2d');
-canvas.width  = 510;
+canvas.width = 510;
 canvas.height = 100;
+
 function drawBubbleCanvas(arr, number = false, swap = false, color = '#000') {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let x = 2, i = 0, l = arr.length; i < l; x += 50, i++) {
@@ -128,14 +130,15 @@ function drawBubbleCanvas(arr, number = false, swap = false, color = '#000') {
                 ctx.lineTo(x + 85, 30);
                 ctx.fill();
             }
-        } 
+        }
     }
 }
+
 function drawmMixingCanvas(arr, number, swap = false) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    color = '#000';
+    let color = '#000';
     for (let x = 2, i = 0, l = arr.length; i < l; x += 50, i++) {
-    //квадрат
+        //квадрат
         ctx.fillStyle = color;
         if (number === i || number - 1 === i) {
             if (number !== false) {
@@ -177,17 +180,18 @@ function drawmMixingCanvas(arr, number, swap = false) {
                 ctx.lineTo(x + 35, 30);
                 ctx.fill();
             }
-        } 
+        }
     }
 }
+
 function drawCombCanvas(arr, number, number1, swap = false) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    color = '#000';
+    let color = '#000';
     for (let x = 2, i = 0, l = arr.length; i < l; x += 50, i++) {
-    //квадрат
+        //квадрат
         ctx.fillStyle = color;
-        if (number === i || number1 ===i) {
-            if (number !== false || number1 !== false ) {
+        if (number === i || number1 === i) {
+            if (number !== false || number1 !== false) {
                 ctx.strokeStyle = "red";
             }
         } else {
@@ -221,7 +225,7 @@ function drawCombCanvas(arr, number, number1, swap = false) {
                 ctx.lineTo(x + 25, 25);
                 ctx.fill();
             }
-        } 
+        }
         if (number1 === i) {
             ctx.fillStyle = "red";
             ctx.beginPath();
@@ -242,15 +246,15 @@ function drawCombCanvas(arr, number, number1, swap = false) {
                 ctx.lineTo(x + 25, 25);
                 ctx.fill();
             }
-        } 
+        }
     }
 }
 
 function drawSelectionCanvas(arr, step, done, min, max, swap = false) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    color = "#000";
+    let color = "#000";
     for (let x = 2, i = 0, l = arr.length; i < l; x += 50, i++) {
-    //квадрат
+        //квадрат
         ctx.fillStyle = color;
         if (step === i) {
             if (step !== false) {
@@ -286,7 +290,7 @@ function drawSelectionCanvas(arr, step, done, min, max, swap = false) {
             ctx.lineTo(x + 29, 100);
             ctx.lineTo(x + 19, 100);
             ctx.fill();
-        } 
+        }
         if (max === i) {
             if (swap === 1) {
                 ctx.beginPath();
@@ -301,7 +305,7 @@ function drawSelectionCanvas(arr, step, done, min, max, swap = false) {
                 ctx.lineTo(x + 25, 25);
                 ctx.fill();
             }
-        }  
+        }
         if (min === i) {
             if (swap === 1) {
                 ctx.beginPath();
@@ -319,11 +323,13 @@ function drawSelectionCanvas(arr, step, done, min, max, swap = false) {
         }
     }
 }
+
 let isActive = false;
 let sortingState = true;
 btnSort.addEventListener('click', startSort);
-function startSort(){
-    if (btnSort.textContent == 'Остановить') {
+
+function startSort() {
+    if (btnSort.textContent === 'Остановить') {
         sortingState = false;
         return;
     }
@@ -334,9 +340,9 @@ function startSort(){
         titleCompleteArray.classList.remove('empty-array');
     }
     for (let i = 0, l = arrInput.length; i < l; i++) {
-        if (arrInput[i].value){
+        if (arrInput[i].value) {
             arr.push(Number(arrInput[i].value));
-            arrOrigin.push(' '+ arrInput[i].value);
+            arrOrigin.push(' ' + arrInput[i].value);
         }
     }
     if (arr.length === 0) {
@@ -347,60 +353,55 @@ function startSort(){
     function sleep(ms) {
         return new Promise(
             resolve => setTimeout(resolve, ms)
-        );
+        )
     }
-    
+
     if (!isActive) {
         btnSort.textContent = 'Остановить';
         isActive = true;
-        
+
         for (let i = 0, l = speedBtn.length; i < l; i++) {
-            if (speedBtn[i].classList.contains('active')){
+            if (speedBtn[i].classList.contains('active')) {
                 speed = Number(speedBtn[i].textContent);
             }
         }
-        
+
         originalArray.textContent = "[" + arrOrigin + "]";
-        function stopSorting(){
+
+        function stopSorting() {
             isActive = false;
             sortingState = true;
             btnSort.textContent = 'Сортировать'
         }
-        async function startBubble(){
-            let newArr = arr; 
-            do{
-                swap = false;
-                for (let i = 0, l = newArr.length - 1; i < l; i++) {
+
+        async function startBubble() {
+            let newArr = arr;
+            for (let out = newArr.length - 1; out > 0; out--) {
+                for (let i = 0; i < out; i++) {
                     if (sortingState) {
                         await drawBubbleCanvas(newArr, i);
-                        await sleep(speed * 1000);
                         if (newArr[i] > newArr[i + 1]) {
                             temp = newArr[i + 1];
                             newArr[i + 1] = newArr[i];
                             newArr[i] = temp;
-                            swap = true;
                             await drawBubbleCanvas(newArr, i, 1);
                         } else {
                             await drawBubbleCanvas(newArr, i);
                         }
                         await sleep(speed * 1000);
-                    } else {
-                        drawBubbleCanvas(newArr, false, false, 'green');
-                        stopSorting();
-                        return;
                     }
                 }
-            } while (swap);
+            }
             drawBubbleCanvas(newArr, false, false, 'green');
 
             stopSorting();
         }
 
-        async function startMixing(){
-            let newArr = arr; 
+        async function startMixing() {
+            let newArr = arr;
             let start = 0;
             let stop = newArr.length - 1;
-            do{
+            do {
                 swap = false;
                 for (i = start; i < stop; i++) {
                     if (sortingState) {
@@ -422,12 +423,12 @@ function startSort(){
                         return;
                     }
                 }
-                for (l = stop - 1;l >= start; l--) {
+                for (l = stop - 1; l >= start; l--) {
                     if (sortingState) {
                         await drawmMixingCanvas(newArr, l + 1);
                         await sleep(speed * 1000);
                         if (newArr[l] > newArr[l + 1]) {
-                            temp = newArr[l + 1];
+                            let temp = newArr[l + 1];
                             newArr[l + 1] = newArr[l];
                             newArr[l] = temp;
                             swap = true;
@@ -448,8 +449,9 @@ function startSort(){
             drawBubbleCanvas(newArr, false, false, 'green');
             stopSorting();
         }
-        async function startDwarf(){
-            let newArr = arr; 
+
+        async function startDwarf() {
+            let newArr = arr;
             let index = 1;
             let nextIndex = index + 1;
             while (index < newArr.length) {
@@ -458,7 +460,7 @@ function startSort(){
                     await sleep(speed * 1000);
                     if (newArr[index - 1] < newArr[index]) {
                         index = nextIndex;
-                        nextIndex++; 
+                        nextIndex++;
                     } else {
                         temp = newArr[index - 1];
                         newArr[index - 1] = newArr[index];
@@ -480,8 +482,9 @@ function startSort(){
             drawBubbleCanvas(newArr, false, false, 'green');
             stopSorting();
         }
-        async function startComb(){
-            let newArr = arr; 
+
+        async function startComb() {
+            let newArr = arr;
             const l = newArr.length;
             const constant = 1.25;
             let step = l / constant;
@@ -508,8 +511,9 @@ function startSort(){
             drawBubbleCanvas(newArr, false, false, 'green');
             stopSorting();
         }
-        async function startSelection(){
-            let newArr = arr; 
+
+        async function startSelection() {
+            let newArr = arr;
             const l = newArr.length;
             for (let i = 0; i < l; i++) {
                 let min = i;
@@ -528,7 +532,7 @@ function startSort(){
                         return;
                     }
                 }
-                if (min != i) {
+                if (min !== i) {
                     let temp = newArr[i];
                     newArr[i] = newArr[min];
                     newArr[min] = temp;
@@ -550,6 +554,6 @@ function startSort(){
             startComb();
         } else if (sortMethod.value === 'selection') {
             startSelection();
-        } 
+        }
     }
 }
