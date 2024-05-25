@@ -85,7 +85,7 @@ let ctx = canvas.getContext('2d');
 canvas.width = 510;
 canvas.height = 100;
 
-function drawBubbleCanvas(arr, number = false, swap = false, color = '#000') {
+function drawBubbleCanvas(arr, number = false, swap = false, color = '#000', out = 0) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let x = 2, i = 0, l = arr.length; i < l; x += 50, i++) {
         //квадрат
@@ -94,13 +94,15 @@ function drawBubbleCanvas(arr, number = false, swap = false, color = '#000') {
             if (number !== false) {
                 ctx.strokeStyle = "red";
             }
+        } else if (i > out) {
+            ctx.strokeStyle = "green";
         } else {
             ctx.strokeStyle = color;
         }
         ctx.strokeRect(x, 40, 47, 50);
         //текст
         ctx.fillStyle = color;
-        ctx.font = "17px serif";
+        ctx.font = "16px arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(arr[i], x + 25, 65);
@@ -150,7 +152,7 @@ function drawmMixingCanvas(arr, number, swap = false) {
         ctx.strokeRect(x, 40, 47, 50);
         //текст
         ctx.fillStyle = color;
-        ctx.font = "17px serif";
+        ctx.font = "16px arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(arr[i], x + 25, 65);
@@ -200,7 +202,7 @@ function drawCombCanvas(arr, number, number1, swap = false) {
         ctx.strokeRect(x, 40, 47, 50);
         //текст
         ctx.fillStyle = color;
-        ctx.font = "17px serif";
+        ctx.font = "16px arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(arr[i], x + 25, 65);
@@ -269,7 +271,7 @@ function drawSelectionCanvas(arr, step, done, min, max, swap = false) {
             ctx.fillStyle = "green";
             ctx.fillRect(x, 40, 47, 50);
             ctx.fillStyle = "#fff";
-            ctx.font = "17px serif";
+            ctx.font = "16px arial";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText(arr[i], x + 25, 65);
@@ -277,7 +279,7 @@ function drawSelectionCanvas(arr, step, done, min, max, swap = false) {
             ctx.strokeRect(x, 40, 47, 50);
             //текст
             ctx.fillStyle = color;
-            ctx.font = "17px serif";
+            ctx.font = "16px arial";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText(arr[i], x + 25, 65);
@@ -379,14 +381,15 @@ function startSort() {
             for (let out = newArr.length - 1; out > 0; out--) {
                 for (let i = 0; i < out; i++) {
                     if (sortingState) {
-                        await drawBubbleCanvas(newArr, i);
+                        await drawBubbleCanvas(newArr, i, false, "#000", out);
+                        await sleep(speed * 1000);
                         if (newArr[i] > newArr[i + 1]) {
                             temp = newArr[i + 1];
                             newArr[i + 1] = newArr[i];
                             newArr[i] = temp;
-                            await drawBubbleCanvas(newArr, i, 1);
+                            await drawBubbleCanvas(newArr, i, 1, "#000", out);
                         } else {
-                            await drawBubbleCanvas(newArr, i);
+                            await drawBubbleCanvas(newArr, i, false, "#000", out);
                         }
                         await sleep(speed * 1000);
                     }
