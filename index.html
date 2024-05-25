@@ -45,13 +45,12 @@
 //Сортировка пузырьковым методом
 const arraySorting = () => {
     let array = [37, 2, 89, 65, 1, 28, 41];
-    for (let out = array.length - 1; out > 0; out--) {
+    for(out = array.length - 1; out > 0; out--){
         for (let i = 0; i < out; i++) {
             if (array[i] > array[i + 1]) {
                 temp = array[i + 1];
                 array[i + 1] = array[i];
                 array[i] = temp;
-                swap = true;
             }
         }
     }
