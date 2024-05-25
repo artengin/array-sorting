@@ -9,12 +9,13 @@ const codeMixing = document.querySelector("#code-mixing");
 const codeDwarf = document.querySelector("#code-dwarf");
 const codeComb = document.querySelector("#code-comb");
 const codeSelection = document.querySelector("#code-selection");
+const codeDoubleSelection = document.querySelector("#code-double-selection");
 const btnClear = document.querySelector(".btn-clear");
 const btnRandom = document.querySelector(".btn-random");
 const arrInput = document.querySelectorAll('.input-sort');
 const titleCompleteArray = document.querySelector('.title-complete-array');
-let codeArray = [codeBubble, codeMixing, codeDwarf, codeComb, codeSelection];
-let methodName = ['bubble', 'mixing', 'dwarf', 'comb', 'selection'];
+let codeArray = [codeBubble, codeMixing, codeDwarf, codeComb, codeSelection, codeDoubleSelection];
+let methodName = ['bubble', 'mixing', 'dwarf', 'comb', 'selection', 'double-selection'];
 
 sortMethod.addEventListener('click', openCode);
 codeOpen.addEventListener('click', openCode);
@@ -329,6 +330,124 @@ function drawSelectionCanvas(arr, step, done, min, max, swap = false) {
     }
 }
 
+function drawDoubleSelectionCanvas(arr, step, start, stop, min, max, swap = false) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    color = "#000";
+    for (let x = 2, i = 0, l = arr.length; i < l; x += 50, i++) {
+    //квадрат
+        ctx.fillStyle = color;
+        if (step === i) {
+            if (step !== false) {
+                ctx.strokeStyle = "red";
+            }
+        } else if (i < start || i >= stop) {
+            ctx.strokeStyle = "green";
+            ctx.fillStyle = "green";
+        } else {
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+        }
+        if (start === i && swap === 1) {
+            ctx.fillStyle = '#4e90ff';
+            ctx.fillRect(x, 40, 47, 50);
+            ctx.fillStyle = "#fff";
+        } else if (stop - 1 === i && swap === 2) {
+            ctx.fillStyle = '#084ec3';
+            ctx.fillRect(x, 40, 47, 50);
+            ctx.fillStyle = "#fff";
+        }
+        if (min === i) {
+            ctx.fillStyle = '#4e90ff';
+            ctx.fillRect(x, 40, 47, 50);
+            ctx.fillStyle = "#fff";
+            ctx.font = "16px arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(arr[i], x + 25, 65);
+        } else if (max === i) {
+            ctx.fillStyle = "#084ec3";
+            ctx.fillRect(x, 40, 47, 50);
+            ctx.fillStyle = "#fff";
+            ctx.font = "16px arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(arr[i], x + 25, 65);
+        } else {
+            ctx.strokeRect(x, 40, 47, 50);
+            //текст
+            ctx.font = "16px arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(arr[i], x + 25, 65);
+        }
+        //треугольник
+        if (step === i) {
+            ctx.fillStyle = "red";
+            ctx.beginPath();
+            ctx.moveTo(x + 25, 92);
+            ctx.lineTo(x + 30, 100);
+            ctx.lineTo(x + 20, 100);
+            ctx.fill();
+        } 
+        if (swap === 1) {
+            if (min === i) {
+                ctx.beginPath();
+                ctx.strokeStyle = "green";
+                ctx.moveTo(x + 25, 30);
+                ctx.lineTo(x + 35, 30);
+                ctx.stroke();
+                ctx.fillStyle = "green";
+                ctx.beginPath();
+                ctx.moveTo(x + 25, 35);
+                ctx.lineTo(x + 20, 30);
+                ctx.lineTo(x + 25, 25);
+                ctx.fill();
+            }
+            if (start === i) {
+                ctx.beginPath();
+                ctx.strokeStyle = "green";
+                ctx.moveTo(x + 15, 30);
+                ctx.lineTo(x + 25, 30);
+                ctx.stroke();
+                ctx.fillStyle = "green";
+                ctx.beginPath();
+                ctx.moveTo(x + 25, 35);
+                ctx.lineTo(x + 30, 30);
+                ctx.lineTo(x + 25, 25);
+                ctx.fill();
+            }
+        }
+        if (swap === 2) {
+            if (stop - 1 === i) {
+                ctx.beginPath();
+                ctx.strokeStyle = "green";
+                ctx.moveTo(x + 25, 30);
+                ctx.lineTo(x + 35, 30);
+                ctx.stroke();
+                ctx.fillStyle = "green";
+                ctx.beginPath();
+                ctx.moveTo(x + 25, 35);
+                ctx.lineTo(x + 20, 30);
+                ctx.lineTo(x + 25, 25);
+                ctx.fill();
+            }
+            if (max === i) {
+                ctx.beginPath();
+                ctx.strokeStyle = "green";
+                ctx.moveTo(x + 15, 30);
+                ctx.lineTo(x + 25, 30);
+                ctx.stroke();
+                ctx.fillStyle = "green";
+                ctx.beginPath();
+                ctx.moveTo(x + 25, 35);
+                ctx.lineTo(x + 30, 30);
+                ctx.lineTo(x + 25, 25);
+                ctx.fill();
+            }
+        }
+    }
+}
+
 let isActive = false;
 let sortingState = true;
 btnSort.addEventListener('click', startSort);
@@ -550,6 +669,56 @@ function startSort() {
             stopSorting();
         }
 
+        async function startDoubleSelection(){
+            let newArr = arr; 
+            const l = newArr.length;
+            for (let i = 0, end = l - 1; i < end; i++, end--) {
+                let min = i;
+                let max = i;
+                for (let j = i; j <= end; j++) {
+                    if (sortingState) {
+                        await drawDoubleSelectionCanvas(newArr, j, i, end + 1, min, max);
+                        await sleep(speed * 1000);
+                        if (newArr[j] < newArr[min]) {
+                            min = j;
+                            await drawDoubleSelectionCanvas(newArr, j, i, end + 1, min, max);
+                            await sleep(speed * 1000);
+                        }
+                        if (newArr[j] > newArr[max]) {
+                            max = j;
+                            await drawDoubleSelectionCanvas(newArr, j, i, end + 1, min, max);
+                            await sleep(speed * 1000);
+                        }
+                    } else {
+                        drawBubbleCanvas(newArr, false, false, 'green');
+                        stopSorting();
+                        return;
+                    }
+                }
+
+                if (min !== i) {
+                    let temp = newArr[i];
+                    newArr[i] = newArr[min];
+                    newArr[min] = temp;
+            
+                    if (max === i) {
+                        max = min;
+                    }
+                    await drawDoubleSelectionCanvas(newArr, false, i, end + 1, min, max, 1);
+                    await sleep(speed * 3000);
+                }
+                if (max !== end) {
+                    let temp = newArr[end];
+                    newArr[end] = newArr[max];
+                    newArr[max] = temp;
+                    await drawDoubleSelectionCanvas(newArr, false, i, end + 1, false, max, 2);
+                    await sleep(speed * 3000);
+                }
+            }                
+            drawBubbleCanvas(newArr, false, false, 'green');
+            stopSorting();
+        }
+
         if (sortMethod.value === 'bubble') {
             startBubble();
         } else if (sortMethod.value === 'mixing') {
@@ -560,6 +729,8 @@ function startSort() {
             startComb();
         } else if (sortMethod.value === 'selection') {
             startSelection();
-        }
+        } else if (sortMethod.value === 'double-selection') {
+            startDoubleSelection();
+        } 
     }
 }

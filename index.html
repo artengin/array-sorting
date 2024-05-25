@@ -16,6 +16,7 @@
                 <option value="dwarf">Гномья сортировка</option>
                 <option value="comb">Сортировка расческой</option>
                 <option value="selection">Сортировка выбором</option>
+                <option value="double-selection">Двухсторонняя сортировка выбором</option>
               </select>
             <p class="title-complete-array">Заполните массив цифрами:</p>
             <div class='input-block'>
@@ -155,12 +156,81 @@ const arraySorting = () => {
   return array;
 }
 console.log(arraySorting());
+</pre><pre id="code-double-selection">
+//Двухсторонняя сортировка выбором
+const arraySorting = () => {
+  let array = [37, 2, 89, 65, 1, 28, 41];
+  const l = array.length;
+  for(i = 0, end = l-1; i < end; i++, end--){
+    let min = i;
+    let max = i;
+    for (let j = i; j <= end; j++) {
+       if (array[j] < array[min]) {
+         min = j;
+       }
+       if (array[j] > array[max]) {
+         max = j;
+       }
+    }
+    if (min !== i) {
+        let temp = array[i];
+        array[i] = array[min];
+        array[min] = temp;
+
+        if (max === i) {
+            max = min;
+        }
+    }
+    if (max !== end) {
+        let temp = array[end];
+        array[end] = array[max];
+        array[max] = temp;
+    }
+  }
+  return array;
+}
+console.log(arraySorting());
+</pre>
+<pre id="code-double-selection">
+//Двухсторонняя сортировка выбором
+const arraySorting = () => {
+  let array = [37, 2, 89, 65, 1, 28, 41];
+  const l = array.length;
+  for(i = 0, end = l-1; i < end; i++, end--){
+    let min = i;
+    let max = i;
+    for (let j = i; j <= end; j++) {
+       if (array[j] < array[min]) {
+         min = j;
+       }
+       if (array[j] > array[max]) {
+         max = j;
+       }
+    }
+    if (min !== i) {
+        let temp = array[i];
+        array[i] = array[min];
+        array[min] = temp;
+
+        if (max === i) {
+            max = min;
+        }
+    }
+    if (max !== end) {
+        let temp = array[end];
+        array[end] = array[max];
+        array[max] = temp;
+    }
+  }
+  return array;
+}
+console.log(arraySorting());
 </pre>
             </div>
             <canvas id='sort-canvas'></canvas> 
             <p id="original-array"></p>  
         </div>
         <a href="https://github.com/artengin/artengin.github.io" target="_blank" class="git-link"><img src="img/git.png" alt="GitHub.io"></a>
-        <script src="js/script.v.0.7.js"></script>
+        <script src="js/script.v.0.8.js"></script>
     </body>
 </html>
