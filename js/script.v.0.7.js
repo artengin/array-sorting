@@ -96,6 +96,9 @@ function drawBubbleCanvas(arr, number = false, swap = false, color = '#000', out
             }
         } else if (i > out) {
             ctx.strokeStyle = "green";
+            if (out === false) {
+                ctx.strokeStyle = color;
+            }
         } else {
             ctx.strokeStyle = color;
         }
@@ -408,16 +411,16 @@ function startSort() {
                 swap = false;
                 for (i = start; i < stop; i++) {
                     if (sortingState) {
-                        await drawBubbleCanvas(newArr, i);
+                        await drawBubbleCanvas(newArr, i, false, "#000", false);
                         await sleep(speed * 1000);
                         if (newArr[i] > newArr[i + 1]) {
                             temp = newArr[i + 1];
                             newArr[i + 1] = newArr[i];
                             newArr[i] = temp;
                             swap = true;
-                            await drawBubbleCanvas(newArr, i, 1);
+                            await drawBubbleCanvas(newArr, i, 1, "#000", false);
                         } else {
-                            await drawBubbleCanvas(newArr, i);
+                            await drawBubbleCanvas(newArr, i, false, "#000", false);
                         }
                         await sleep(speed * 1000);
                     } else {
