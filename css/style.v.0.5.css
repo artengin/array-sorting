@@ -41,9 +41,22 @@ body{
     cursor: pointer;
     transition: all 0.2s;
 }
+.btn-input-block:first-child{
+    animation: btn-anim 4s infinite ease-in-out;
+}
+@keyframes btn-anim {
+    0% {transform: rotate(0deg)}
+    10% { transform: rotate(-30deg)}
+    18% {transform: rotate(8deg)}
+    20% {transform: rotate(0deg)}
+}
+.btn-input-block:first-child:hover{
+   animation-play-state: paused;
+}
 .btn-random:hover {
     transform: rotate(-20deg)  scale(1.1);
 }
+
 .btn-clear{
     border-radius: 8px;
     padding: 0px;
