@@ -480,15 +480,21 @@ function startSort() {
         )
     }
 
-    if (!isActive) {
-        btnSort.textContent = 'Остановить';
-        isActive = true;
-
+    function setSpeed(){
         for (let i = 0, l = speedBtn.length; i < l; i++) {
             if (speedBtn[i].classList.contains('active')) {
                 speed = Number(speedBtn[i].textContent);
             }
         }
+    }
+    
+    speedBlock.addEventListener('click', setSpeed);
+
+    if (!isActive) {
+        btnSort.textContent = 'Остановить';
+        isActive = true;
+        setSpeed();
+        
 
         originalArray.textContent = "[" + arrOrigin + "]";
 
